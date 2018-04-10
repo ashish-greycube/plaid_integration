@@ -3,7 +3,7 @@
  "allow_guest_to_view": 0, 
  "allow_import": 1, 
  "allow_rename": 0, 
- "autoname": "field:category_id", 
+ "autoname": "field:category", 
  "beta": 0, 
  "creation": "2018-04-08 08:14:46.935102", 
  "custom": 0, 
@@ -116,7 +116,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-04-08 08:28:46.678954", 
+ "modified": "2018-04-10 07:00:48.171577", 
  "modified_by": "Administrator", 
  "module": "Plaid Integration", 
  "name": "Plaid Category", 
@@ -150,6 +150,7 @@
  "show_name_in_global_search": 0, 
  "sort_field": "modified", 
  "sort_order": "DESC", 
+ "title_field": "category", 
  "track_changes": 1, 
  "track_seen": 0
 }
