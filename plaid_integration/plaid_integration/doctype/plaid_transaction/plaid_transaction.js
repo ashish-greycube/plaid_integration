@@ -23,8 +23,8 @@ frappe.ui.form.on("Plaid Transaction", {
 				}
 			})
 
-			linked_category_account=frappe.model.get_list('Plaid Category Account Mapping',filters={'plaid_category_id':frm.doc.category_id}, fields=['name','account'])
-			linked_bank_account=frappe.model.get_list('Plaid Bank Account Mapping',filters={'plaid_account_id':frm.doc.account_id}, fields=['bank_account'])
+			//linked_category_account=frappe.model.get_list('Plaid Category Account Mapping',filters={'plaid_category_id':frm.doc.category_id}, fields=['name','account'])
+			//linked_bank_account=frappe.model.get_list('Plaid Bank Account Mapping',filters={'plaid_account_id':frm.doc.account_id}, fields=['bank_account'])
 
 			console.log(linked_category_account)
 			console.log(linked_bank_account)
