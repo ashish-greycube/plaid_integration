@@ -1,3 +1,5 @@
 {
-	
+	"js/plaid.desk.min.js": [
+		"public/js/link_initialize.js"
+	]
 }
