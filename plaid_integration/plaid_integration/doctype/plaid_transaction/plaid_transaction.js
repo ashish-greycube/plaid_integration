@@ -4,11 +4,23 @@
 frappe.ui.form.on("Plaid Transaction", {
 
 	refresh: function (frm) {
+		
+		if (frm.doc.linked_jv) {
+			frm.add_custom_button(frm.doc.linked_jv, function () {
+				frappe.set_route("Form","Journal Entry",frm.doc.linked_jv);
+			})
+		} else {
+			create_jv();
+		}
+		
+		function create_jv() {		
+
 		frm.add_custom_button("Journal Entry", function () {
 
 			let category = new Promise(resolve => {
-				console.log(frm.doc.category_id)
-			if (frm.doc.category_id!=undefined)	{
+				if (frm.doc.category_id == undefined) {
+					resolve();
+				}
 				frappe.call({
 					method: "frappe.client.get_list",
 					args: {
@@ -19,13 +31,19 @@ frappe.ui.form.on("Plaid Transaction", {
 						fields: ["account"]
 					}
 				}).then((r) => {
-					if (r.message) {						
+					if (r.message) {
+					resolve(r.message[0].account);}
+					else{
+						resolve()
 					}
-					resolve(r.message[0].account);
-				});}
+				});
+
 			});
 
 			let bank = new Promise(resolve => {
+				if (frm.doc.account_id == undefined) {
+					resolve();
+				}
 				frappe.call({
 					method: "frappe.client.get_list",
 					args: {
@@ -36,9 +54,12 @@ frappe.ui.form.on("Plaid Transaction", {
 						fields: ["bank_account"]
 					}
 				}).then((r) => {
-					if (r.message) {						
-					}
+					if (r.message) {
 					resolve(r.message[0].bank_account);
+					}
+					else{
+						resolve()
+					}
 				});
 			});
 
@@ -46,36 +67,40 @@ frappe.ui.form.on("Plaid Transaction", {
 			Promise.all([category, bank]).then((r) => {
 				linked_category_account = r[0]
 				linked_bank_account = r[1]
-			
+
 				var doc = frappe.model.get_new_doc("Journal Entry");
 				doc.posting_date = frm.doc.date;
 				doc.voucher_type = "Journal Entry";
 				doc.naming_series = "JV-";
-				//doc.cheque_no = frm.doc.name
 				doc.company = frappe.defaults.get_default('company');
-				
+
 				if (frm.doc.location != "")
-					locationLabel="[Location Details] --\n"
+					locationLabel = "[Location Details] --\n"+ frm.doc.location + '\n' + '\n'
 				else
-					locationLabel=""
+					locationLabel = ""
 
-				if (linked_category_account != "")
-					categoryLabel="[Category] --\n"
+				if (linked_category_account != undefined)
+					categoryLabel = "[Category] --\n" + linked_category_account + '\n' + '\n'
 				else
-					categoryLabel=""
+					categoryLabel = ""
 
-				if (frm.doc.bank!="")
-					bankLabel="[Bank] -- "
+				if (frm.doc.bank != "")
+					bankLabel = "[Bank] -- "+ frm.doc.bank + '\n' + '\n' 
 				else
-					bankLabel=""
-	
-				plaidIDLabel="[Plaid ID] -- "
+					bankLabel = ""
+
+				if (frm.doc.transaction_id != "")
+					transactionIDLabel = "[Transaction ID] -- "+ frm.doc.transaction_id
+				else
+					transactionIDLabel = ""
+
 				
-				doc.user_remark=categoryLabel+linked_category_account+'\n' +'\n'+locationLabel+frm.doc.location +'\n' +'\n'+ bankLabel+frm.doc.bank+'\n'+'\n'+plaidIDLabel+frm.doc.name
-				doc.title=frm.doc.transaction_name+'-'+linked_category_account
 
-				doc.cheque_no = frm.doc.transaction_id;
-				doc.cheque_date=frm.doc.date;
+				doc.user_remark = categoryLabel + locationLabel  + bankLabel + transactionIDLabel 
+				doc.title = (frm.doc.transaction_name != undefined ? frm.doc.transaction_name : '') + ( linked_category_account != undefined ? '-'+ linked_category_account: '') 
+
+				doc.cheque_no = frm.doc.name
+				doc.cheque_date = frm.doc.date;
 
 				var row = frappe.model.add_child(doc, "Journal Entry Account", "accounts");
 				row.account = linked_category_account
@@ -83,8 +108,8 @@ frappe.ui.form.on("Plaid Transaction", {
 					row.credit_in_account_currency = frm.doc.amount
 				else
 					row.debit_in_account_currency = frm.doc.amount
-				
-					
+
+
 				var row = frappe.model.add_child(doc, "Journal Entry Account", "accounts");
 				row.account = linked_bank_account
 				if (frm.doc.amount < 0)
@@ -101,5 +126,7 @@ frappe.ui.form.on("Plaid Transaction", {
 
 
 		});
+
+	}
 	}
 });

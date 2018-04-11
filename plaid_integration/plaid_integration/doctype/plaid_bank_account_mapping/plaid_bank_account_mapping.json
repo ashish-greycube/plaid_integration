@@ -9,7 +9,7 @@
  "custom": 0, 
  "docstatus": 0, 
  "doctype": "DocType", 
- "document_type": "", 
+ "document_type": "Setup", 
  "editable_grid": 1, 
  "engine": "InnoDB", 
  "fields": [
@@ -146,7 +146,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-04-10 08:30:09.132498", 
+ "modified": "2018-04-11 11:41:10.571407", 
  "modified_by": "Administrator", 
  "module": "Plaid Integration", 
  "name": "Plaid Bank Account Mapping", 

@@ -8,7 +8,7 @@
  "custom": 0, 
  "docstatus": 0, 
  "doctype": "DocType", 
- "document_type": "", 
+ "document_type": "Setup", 
  "editable_grid": 1, 
  "engine": "InnoDB", 
  "fields": [
@@ -323,7 +323,7 @@
  "issingle": 1, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-04-05 16:22:32.482309", 
+ "modified": "2018-04-11 11:42:36.319796", 
  "modified_by": "Administrator", 
  "module": "Plaid Integration", 
  "name": "Plaid Settings", 

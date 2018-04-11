@@ -9,7 +9,7 @@
  "custom": 0, 
  "docstatus": 0, 
  "doctype": "DocType", 
- "document_type": "", 
+ "document_type": "Other", 
  "editable_grid": 1, 
  "engine": "InnoDB", 
  "fields": [
@@ -84,7 +84,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-04-10 07:10:08.038775", 
+ "modified": "2018-04-11 11:40:42.590047", 
  "modified_by": "Administrator", 
  "module": "Plaid Integration", 
  "name": "Plaid Account", 

@@ -4,11 +4,11 @@ from . import __version__ as app_version
 
 app_name = "plaid_integration"
 app_title = "Plaid Integration"
-app_publisher = "Drivedgevd"
+app_publisher = "GreyCube Technologies"
 app_description = "Plaid Integration"
-app_icon = "octicon octicon-file-directory"
-app_color = "grey"
-app_email = "varun.deshmukh@drivedge.com"
+app_icon = "fa fa-money"
+app_color = "#0e304b"
+app_email = "admin@greycube.in"
 app_license = "MIT"
 
 # Includes in <head>
@@ -16,7 +16,7 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/plaid_integration/css/plaid_integration.css"
-app_include_js = "/assets/js/plaid.desk.min.js"
+# app_include_js = "/assets/js/plaid.desk.min.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/plaid_integration/css/plaid_integration.css"
@@ -86,6 +86,14 @@ app_include_js = "/assets/js/plaid.desk.min.js"
 # 		"on_trash": "method"
 #	}
 # }
+
+doc_events = {
+    "Journal Entry":{
+        "after_insert": "plaid_integration.plaid_integration.doctype.plaid_transaction.plaid_transaction.insert_JVid_in_plaidtransaction",
+    }
+}
+
+
 
 # Scheduled Tasks
 # ---------------

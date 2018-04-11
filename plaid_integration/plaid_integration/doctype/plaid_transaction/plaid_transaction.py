@@ -8,3 +8,10 @@ from frappe.model.document import Document
 
 class PlaidTransaction(Document):
 	pass
+
+@frappe.whitelist()
+def insert_JVid_in_plaidtransaction(self,method):
+    doc = frappe.get_doc('Plaid Transaction', self.cheque_no)
+    if doc:
+		doc.linked_jv=self.name
+		doc.save()
