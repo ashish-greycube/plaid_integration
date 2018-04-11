@@ -15,3 +15,4 @@ def insert_JVid_in_plaidtransaction(self,method):
     if doc:
 		doc.linked_jv=self.name
 		doc.save()
+		#frappe.reload_doc("plaid_integration", "doctype", doc.name)
