@@ -6,8 +6,8 @@ def get_data():
 	return [
 		{
 			"module_name": "Plaid Integration",
-			"color": "grey",
-			"icon": "octicon octicon-file-directory",
+			"color": "#0e304b",
+			"icon": "fa fa-money",
 			"type": "module",
 			"label": _("Plaid Integration")
 		}
