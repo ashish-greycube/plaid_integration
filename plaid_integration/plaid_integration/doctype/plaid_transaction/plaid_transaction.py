@@ -13,9 +13,9 @@ class PlaidTransaction(Document):
 def insert_JVid_in_plaidtransaction(self,method):
 	if (self.cheque_no!=None):
 		if  ("PT-" in self.cheque_no):
-			doc = frappe.get_doc('Plaid Transaction', self.cheque_no)
-    		if doc:
+			if not frappe.db.exists('Plaid Transaction', self.cheque_no):
+				return
+			else:
+				doc = frappe.get_doc('Plaid Transaction', self.cheque_no)
 				doc.linked_jv=self.name
 				doc.save()
-				return
-			return
