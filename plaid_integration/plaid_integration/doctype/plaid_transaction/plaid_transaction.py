@@ -11,7 +11,11 @@ class PlaidTransaction(Document):
 
 @frappe.whitelist()
 def insert_JVid_in_plaidtransaction(self,method):
-    doc = frappe.get_doc('Plaid Transaction', self.cheque_no)
-    if doc:
-		doc.linked_jv=self.name
-		doc.save()
+	if (self.cheque_no!=None):
+		if  ("PT-" in self.cheque_no):
+			doc = frappe.get_doc('Plaid Transaction', self.cheque_no)
+    		if doc:
+				doc.linked_jv=self.name
+				doc.save()
+				return
+			return
