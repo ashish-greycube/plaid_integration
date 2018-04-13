@@ -42,7 +42,7 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "unique": 0
+   "unique": 1
   }, 
   {
    "allow_bulk_edit": 0, 
@@ -146,7 +146,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-04-11 11:40:56.526814", 
+ "modified": "2018-04-13 00:13:05.623534", 
  "modified_by": "Administrator", 
  "module": "Plaid Integration", 
  "name": "Plaid Category Account Mapping", 

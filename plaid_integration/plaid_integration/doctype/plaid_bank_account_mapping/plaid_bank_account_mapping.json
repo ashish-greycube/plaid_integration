@@ -42,7 +42,7 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "unique": 0
+   "unique": 1
   }, 
   {
    "allow_bulk_edit": 0, 
@@ -73,7 +73,7 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "unique": 1
+   "unique": 0
   }, 
   {
    "allow_bulk_edit": 0, 
@@ -133,7 +133,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "unique": 1
+   "unique": 0
   }
  ], 
  "has_web_view": 0, 
@@ -146,7 +146,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-04-11 11:41:10.571407", 
+ "modified": "2018-04-13 00:13:28.454393", 
  "modified_by": "Administrator", 
  "module": "Plaid Integration", 
  "name": "Plaid Bank Account Mapping", 
