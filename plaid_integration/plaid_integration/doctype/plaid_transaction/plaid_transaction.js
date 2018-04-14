@@ -109,17 +109,17 @@ frappe.ui.form.on("Plaid Transaction", {
 					var row = frappe.model.add_child(doc, "Journal Entry Account", "accounts");
 					row.account = linked_category_account
 					if (frm.doc.amount < 0)
-						row.credit_in_account_currency = frm.doc.amount
+						row.credit_in_account_currency = Math.abs(frm.doc.amount)
 					else
-						row.debit_in_account_currency = frm.doc.amount
+						row.debit_in_account_currency = Math.abs(frm.doc.amount)
 
 
 					var row = frappe.model.add_child(doc, "Journal Entry Account", "accounts");
 					row.account = linked_bank_account
 					if (frm.doc.amount < 0)
-						row.debit_in_account_currency = frm.doc.amount
+						row.debit_in_account_currency = Math.abs(frm.doc.amount)
 					else
-						row.credit_in_account_currency = frm.doc.amount
+						row.credit_in_account_currency = Math.abs(frm.doc.amount)
 
 					frappe.set_route("Form", doc.doctype, doc.name);
 

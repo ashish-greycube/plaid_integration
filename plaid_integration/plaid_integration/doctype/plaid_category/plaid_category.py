@@ -7,4 +7,11 @@ import frappe
 from frappe.model.document import Document
 
 class PlaidCategory(Document):
-	pass
+	
+	def validate(self):
+		if(self.category_3):
+			self.title=self.category_1+" - "+self.category_2+" - "+self.category_3
+		elif(self.category_2):
+			self.title=self.category_1+" - "+self.category_2
+		else:
+			self.title=self.category_1

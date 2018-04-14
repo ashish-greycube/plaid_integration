@@ -49,13 +49,13 @@ class PlaidSettings(Document):
 			if key == "categories":
 					for v in val:
 						if (len(v['hierarchy'])>2):
-							item=["","",v['category_id'], v['group'],v['hierarchy'][0],v['hierarchy'][1],v['hierarchy'][2]]
+							item=["",v['category_id'],v['category_id'], v['group'],v['hierarchy'][0],v['hierarchy'][1],v['hierarchy'][2]]
 						elif(len(v['hierarchy'])>1):
-							item=["","",v['category_id'], v['group'],v['hierarchy'][0],v['hierarchy'][1]]
+							item=["",v['category_id'],v['category_id'], v['group'],v['hierarchy'][0],v['hierarchy'][1]]
 						elif(len(v['hierarchy'])>0):
-							item=["","",v['category_id'], v['group'],v['hierarchy'][0]]						
+							item=["",v['category_id'],v['category_id'], v['group'],v['hierarchy'][0]]						
 						content.append(item)
-		importer.upload(content)
+		importer.upload(content,overwrite=True,update_only =False,ignore_encoding_errors=True, no_email=True)
 		frappe.response['type'] = "json"		
 		return categories
 

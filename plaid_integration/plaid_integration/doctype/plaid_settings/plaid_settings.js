@@ -22,11 +22,7 @@ frappe.ui.form.on('Plaid Settings', {
 		}).then((r) => {
 			if (r.message) {
 				console.log(r.message)
-				frappe.call({
-					method: "import_category",
-					doc: frm.doc
-				})
-
+				frappe.msgprint("Syncing of ["+r.message.categories.length+"] categories is completed")
 			} else {
 				//console.log(r)
 			}
