@@ -11,7 +11,9 @@ from frappe.model.document import Document
 from frappe.utils import now_datetime
 from frappe.utils.background_jobs import enqueue
 from plaid_integration.plaid_integration.plaid_controller import PlaidController
-
+from frappe.core.doctype.data_import import exporter
+from frappe.core.doctype.data_import import importer
+from frappe.utils.csvutils import read_csv_content
 class PlaidSettings(Document):
 	
 	def generate_access_token(self, public_token):
@@ -34,6 +36,29 @@ class PlaidSettings(Document):
 		plaid = PlaidController(access_token)
 		transactions = plaid.get_trasaction()
 		return transactions
+	
+
+	@frappe.whitelist()
+	def get_categories(self):
+		plaid = PlaidController()
+		categories = plaid.get_category()
+		content=[]
+		exporter.get_template("Plaid Category", all_doctypes="No", with_data="No")
+		content = read_csv_content(frappe.response.result)
+		for key,val in categories.iteritems():
+			if key == "categories":
+					for v in val:
+						if (len(v['hierarchy'])>2):
+							item=["","",v['category_id'], v['group'],v['hierarchy'][0],v['hierarchy'][1],v['hierarchy'][2]]
+						elif(len(v['hierarchy'])>1):
+							item=["","",v['category_id'], v['group'],v['hierarchy'][0],v['hierarchy'][1]]
+						elif(len(v['hierarchy'])>0):
+							item=["","",v['category_id'], v['group'],v['hierarchy'][0]]						
+						content.append(item)
+		importer.upload(content)
+		frappe.response['type'] = "json"		
+		return categories
+
 
 	def make_sync_data_entries(self, synced_data, bank):
 		accounts = self.sync_accounts(synced_data.get('accounts'), bank)

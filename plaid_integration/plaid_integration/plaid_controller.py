@@ -53,3 +53,11 @@ class PlaidController():
 		except Exception as e:
 			print frappe.get_traceback()
 			raise e
+
+	def get_category(self):
+		try:
+			response = self.client.Categories.get()
+			categories = response['categories']
+			return response
+		except Exception as e:
+			raise e

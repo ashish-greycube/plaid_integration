@@ -13,6 +13,25 @@ frappe.ui.form.on('Plaid Settings', {
 			}
 			frm.set_intro(stuas_map[frm.doc.sync_status])
 		}
+		
+	},
+	sync_categories: function(frm,access_token){
+		frappe.call({
+			method: "get_categories",
+			doc: frm.doc
+		}).then((r) => {
+			if (r.message) {
+				console.log(r.message)
+				frappe.call({
+					method: "import_category",
+					doc: frm.doc
+				})
+
+			} else {
+				//console.log(r)
+			}
+		});
+
 	},
 	sync_transactions: function(frm, bank, access_token) {
 		if(frm.doc.sync_status != "In Progress"){
