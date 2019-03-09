@@ -26,9 +26,9 @@ class PlaidController():
 			if not self.settings:
 				frappe.throw("Please setup Plaid Settings")
 			self.client.Auth.get(self.access_token)
-			print "Authentication Successful....."
+			print("Authentication Successful.....")
 		except Exception as e:
-			print frappe.get_traceback()
+			print(frappe.get_traceback())
 			frappe.msgprint("Authentication Failed ...")
 
 	def get_trasaction(self):
@@ -51,7 +51,7 @@ class PlaidController():
 			access_token = exchange_response['access_token']
 			return access_token
 		except Exception as e:
-			print frappe.get_traceback()
+			print(frappe.get_traceback())
 			raise e
 
 	def get_category(self):

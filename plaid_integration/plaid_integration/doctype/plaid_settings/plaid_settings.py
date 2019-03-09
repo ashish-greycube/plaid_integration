@@ -28,7 +28,7 @@ class PlaidSettings(Document):
 			method = "plaid_integration.plaid_integration.doctype.plaid_settings.plaid_settings.sync_plaid_data"
 			enqueue(method, now=True)
 		except Exception as e:
-			print frappe.get_traceback()
+			print(frappe.get_traceback())
 			self.db_set("sync_status", "Failed")
 			frappe.msgprint("Syncing is failed. Please check Sync log")
 
@@ -134,7 +134,7 @@ class PlaidSettings(Document):
 			sync_log.save()
 			frappe.db.commit()
 		except Exception as e:
-			print frappe.get_traceback()
+			print(frappe.get_traceback())
 			raise e
 
 @frappe.whitelist()
